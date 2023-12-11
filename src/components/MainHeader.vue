@@ -3,11 +3,10 @@
     <div class="header_container">
       <h3>Project List</h3>
       <div class="actions">
-        <router-link id="add-product" :to="{ name: 'product' }"
+        <router-link id="add-product" class="btn" :to="{ name: 'product' }"
           >ADD</router-link
         >
-        |
-        <div id="delete-product-btn">MASS DELETE</div>
+        <button id="delete-product-btn" class="btn">MASS DELETE</button>
       </div>
     </div>
   </div>

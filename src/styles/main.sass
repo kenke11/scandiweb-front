@@ -12,6 +12,48 @@ body
     border-bottom: 1px solid black
     .actions
       display: flex
+      justify-content: space-between
+      button
+        margin-left: 25px
+      .btn
+        border: 1px solid black
+        background: white
+        color: black
+        padding: 4px 8px
+        display: flex
+        align-items: center
+        justify-content: center
+        text-decoration: none
+        cursor: pointer
+        &:hover
+          background: #e7e4e4
+
+
+.add_product
+  margin: 0 2rem
+  #product_form
+    .field_container
+      display: flex
+      max-width: 300px
+      justify-content: space-between
+      margin-top: 12px
+      label
+        margin-top: 6px
+      input
+        padding: 4px 6px
+        border: 1px solid black
+      .invalid
+        border: 1px solid red
+      select
+        width: 100%
+        padding: 4px 6px
+        border: 1px solid black
+      p
+        margin-top: 3px
+        height: 15px
+        color: red
+        font-size: 14px
+        min-width: 160px
 
 
 .product-container
