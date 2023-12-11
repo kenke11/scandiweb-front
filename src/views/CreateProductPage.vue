@@ -47,16 +47,19 @@ import FurnitureFields from "@/components/form/FurnitureFields.vue";
 import DVDFields from "@/components/form/DVDFields.vue";
 import BookFields from "@/components/form/BookFields.vue";
 import ProductCreateHeader from "@/components/header/ProductCreateHeader.vue";
+import { useProductStore } from "@/store/Product";
 
 const selectedType = ref("");
 const selectedTypeComponent = ref("");
+
+const productStore = useProductStore();
 
 const changeType = (type) => {
   selectedType.value = type;
 };
 
 const onSubmit = (value) => {
-  console.log("Form is valid. Submitting...", value);
+  productStore.storeProduct(value);
 };
 
 watch(
