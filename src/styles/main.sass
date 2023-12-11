@@ -1,0 +1,52 @@
+body
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+.header
+  padding: 3rem 2rem
+  .header_container
+    display: flex
+    justify-content: space-between
+    align-items: center
+    border-bottom: 1px solid black
+    .actions
+      display: flex
+
+
+.product-container
+  margin: 0 2rem
+  .product-grid
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+    gap: 20px
+  .product-item
+    border: 1px solid #ccc
+    padding: 20px
+    text-align: center
+    position: relative
+
+    label
+      cursor: pointer
+      position: absolute
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+
+    .delete-checkbox
+      position: absolute
+      top: 1rem
+      left: 1rem
+
+@media screen and (max-width: 768px)
+  .product-grid
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
+
+@media screen and (max-width: 480px)
+  .product-grid
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr))
+  .product-item
+    border: 1px solid #ccc
+    padding: 20px
+    text-align: center
