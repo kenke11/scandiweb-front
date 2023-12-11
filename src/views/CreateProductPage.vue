@@ -1,37 +1,40 @@
 <template>
-  <div class="add_product">
-    <Form @submit="onSubmit" v-slot="{ errors }" id="product_form">
-      <InputField
-        id="sku"
-        label="SKU:"
-        name="sku"
-        :hasError="!!errors.sku"
-        rules="required"
-      />
-      <InputField
-        id="name"
-        label="Name:"
-        name="name"
-        :hasError="!!errors.name"
-        rules="required"
-      />
-      <InputField
-        id="price"
-        label="Price in $:"
-        name="price"
-        :hasError="!!errors.price"
-        rules="required"
-      />
+  <div>
+    <ProductCreateHeader />
+    <div class="add_product">
+      <Form @submit="onSubmit" v-slot="{ errors }" id="product_form">
+        <InputField
+          id="sku"
+          label="SKU:"
+          name="sku"
+          :hasError="!!errors.sku"
+          rules="required"
+        />
+        <InputField
+          id="name"
+          label="Name:"
+          name="name"
+          :hasError="!!errors.name"
+          rules="required"
+        />
+        <InputField
+          id="price"
+          label="Price in $:"
+          name="price"
+          :hasError="!!errors.price"
+          rules="required"
+        />
 
-      <ProductTypeSelector
-        @changeType="changeType"
-        :hasError="!!errors.product_type"
-      />
+        <ProductTypeSelector
+          @changeType="changeType"
+          :hasError="!!errors.product_type"
+        />
 
-      <component :is="selectedTypeComponent" :errors="errors" />
+        <component :is="selectedTypeComponent" :errors="errors" />
 
-      <button type="submit">Submit</button>
-    </Form>
+        <button type="submit">Submit</button>
+      </Form>
+    </div>
   </div>
 </template>
 
@@ -43,6 +46,7 @@ import { ref, watch } from "vue";
 import FurnitureFields from "@/components/form/FurnitureFields.vue";
 import DVDFields from "@/components/form/DVDFields.vue";
 import BookFields from "@/components/form/BookFields.vue";
+import ProductCreateHeader from "@/components/header/ProductCreateHeader.vue";
 
 const selectedType = ref("");
 const selectedTypeComponent = ref("");
