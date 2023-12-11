@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProductListHeader />
+    <ProductListHeader :deleteSelectedProducts="deleteSelectedProducts" />
     <div class="product-container">
       <div class="product-grid">
         <div
@@ -13,6 +13,8 @@
               :id="'product-checkbox-' + index"
               class="delete-checkbox"
               type="checkbox"
+              :value="product.id"
+              v-model="selectedProducts"
           /></label>
           <div>{{ product.sku }}</div>
           <div>{{ product.name }}</div>
@@ -30,6 +32,12 @@ import ProductListHeader from "@/components/header/ProductListHeader.vue";
 
 const projectStore = useProductStore();
 const products = ref(projectStore.products);
+const selectedProducts = ref([]);
+
+const deleteSelectedProducts = () => {
+  projectStore.deleteProducts(selectedProducts.value);
+  selectedProducts.value = [];
+};
 
 onBeforeMount(() => {
   projectStore.getProducts();

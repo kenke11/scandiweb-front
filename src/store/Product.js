@@ -19,6 +19,21 @@ export const useProductStore = defineStore("productStore", {
         this.products = [];
       }
     },
+    async deleteProducts(productIds) {
+      const formData = new FormData();
+      formData.append("ids", productIds);
+
+      try {
+        const response = await axios.post(
+          "http://127.0.0.1:8000/api/products/destroy",
+          formData
+        );
+
+        console.log(response);
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
   getters: {},
 });

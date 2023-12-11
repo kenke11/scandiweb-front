@@ -6,10 +6,25 @@
         <router-link id="add-product" class="btn" :to="{ name: 'product' }"
           >ADD</router-link
         >
-        <button id="delete-product-btn" class="btn">MASS DELETE</button>
+        <button
+          id="delete-product-btn"
+          class="btn"
+          @click="deleteSelectedProducts"
+        >
+          MASS DELETE
+        </button>
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { defineProps } from "vue";
+
+defineProps({
+  deleteSelectedProducts: {
+    type: Function,
+    required: true,
+  },
+});
+</script>
