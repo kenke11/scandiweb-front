@@ -1,6 +1,9 @@
 <template>
   <div>
-    <ProductListHeader :deleteSelectedProducts="deleteSelectedProducts" />
+    <ProductListHeader
+      :deleteSelectedProducts="deleteSelectedProducts"
+      :selectedProducts="selectedProducts"
+    />
     <div class="product-container">
       <div class="product-grid">
         <div

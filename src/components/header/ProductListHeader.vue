@@ -10,6 +10,7 @@
           id="delete-product-btn"
           class="btn"
           @click="deleteSelectedProducts"
+          :disabled="products.length === 0"
         >
           MASS DELETE
         </button>
@@ -19,12 +20,26 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, ref, watch } from "vue";
 
-defineProps({
+const props = defineProps({
   deleteSelectedProducts: {
     type: Function,
     required: true,
   },
+  selectedProducts: {
+    type: Array,
+    required: false,
+    value: [],
+  },
 });
+
+const products = ref([]);
+
+watch(
+  () => props.selectedProducts,
+  (newValue) => {
+    products.value = newValue;
+  }
+);
 </script>
