@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import router from "@/router";
 
 export const useProductStore = defineStore("productStore", {
   id: "product",
   state: () => ({
     products: [],
+    notification: null,
   }),
   actions: {
     async getProducts() {
@@ -16,16 +18,18 @@ export const useProductStore = defineStore("productStore", {
           this.products = [];
         }
       } catch (e) {
-        this.products = [];
+        this.setNotification("", e.status);
       }
     },
     async storeProduct(values) {
-      console.log(values);
       const formData = new FormData();
       formData.append("sku", values.sku);
       formData.append("name", values.name);
       formData.append("price", values.price);
-      formData.append("product_type", values.product_type);
+      formData.append(
+        "product_type",
+        values.product_type ? values.product_type : ""
+      );
 
       switch (values.product_type) {
         case "dvd":
@@ -47,9 +51,12 @@ export const useProductStore = defineStore("productStore", {
           formData
         );
 
-        console.log(response);
+        if (response.status === 200) {
+          this.setNotification(response.data.message, response.status);
+          await router.push({ name: "productList" });
+        }
       } catch (e) {
-        console.log(e);
+        this.setNotification("", e.status);
       }
     },
     async deleteProducts(productIds) {
@@ -62,9 +69,26 @@ export const useProductStore = defineStore("productStore", {
           formData
         );
 
-        console.log(response);
+        if (response.status === 200) {
+          await this.getProducts();
+          this.setNotification(response.data.message, response.status);
+        }
       } catch (e) {
-        console.log(e);
+        this.setNotification("", e.status);
+      }
+    },
+    setNotification(message, status) {
+      this.notification = {};
+      if (status > 199 && 300 > status) {
+        this.notification = {
+          status: "success",
+          message: message,
+        };
+      } else {
+        this.notification = {
+          status: "error",
+          message: "Something went wrong",
+        };
       }
     },
   },

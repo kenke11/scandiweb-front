@@ -81,6 +81,42 @@ body
       top: 1rem
       left: 1rem
 
+.popup-message
+  position: fixed
+  bottom: 20px
+  right: -100%
+  background-color: #ffffff
+  border: 1px solid #ccc
+  padding: 10px 20px
+  border-radius: 10px
+  animation: notification 0.5s forwards
+  animation-delay: 0s
+
+.close-notification
+  animation: closeNotification 2s forwards
+
+.error
+  background: rgb(235, 192, 190)
+  color: rgb(170, 40, 20)
+  border: solid 0.5px rgb(170, 40, 20)
+
+.success
+  background: rgb(217, 240, 210)
+  color: rgb(76, 100, 72)
+  border: solid 0.5px rgb(76, 100, 72)
+
+@keyframes notification
+  from
+    right: -100%
+  to
+    right: 20px
+
+@keyframes closeNotification
+  from
+    right: 20px
+  to
+    right: -100%
+
 @media screen and (max-width: 768px)
   .product-grid
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
