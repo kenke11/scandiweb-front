@@ -25,7 +25,9 @@
 </template>
 
 <script setup>
-import { Field, ErrorMessage, defineProps, defineEmits } from "vee-validate";
+import { defineProps, defineEmits } from "vue";
+import { Field, ErrorMessage } from "vee-validate";
+
 const emit = defineEmits(["changeType"]);
 
 defineProps({
