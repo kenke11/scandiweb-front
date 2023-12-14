@@ -7,11 +7,12 @@ export const useProductStore = defineStore("productStore", {
   state: () => ({
     products: [],
     notification: null,
+    apiUrl: process.env.VUE_APP_API_URL,
   }),
   actions: {
     async getProducts() {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/products");
+        const response = await axios.get(`${this.apiUrl}/api/products`);
         if (response.status === 200) {
           this.products = response.data;
         } else {
@@ -47,7 +48,7 @@ export const useProductStore = defineStore("productStore", {
 
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/products/store",
+          `${this.apiUrl}/api/products/store`,
           formData
         );
 
@@ -65,7 +66,7 @@ export const useProductStore = defineStore("productStore", {
 
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/products/destroy",
+          `${this.apiUrl}/api/products/destroy`,
           formData
         );
 
