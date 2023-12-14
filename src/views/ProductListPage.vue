@@ -22,6 +22,13 @@
           <div>{{ product.sku }}</div>
           <div>{{ product.name }}</div>
           <div>{{ product.price }}$</div>
+          <div v-if="product.dvd">Size: {{ product.dvd.size }} MB</div>
+          <div v-if="product.book">Weight: {{ product.book.weight }}KG</div>
+          <div v-if="product.furniture">
+            Dimension: {{ product.furniture.width }}x{{
+              product.furniture.height
+            }}x{{ product.furniture.length }}
+          </div>
         </div>
       </div>
     </div>
