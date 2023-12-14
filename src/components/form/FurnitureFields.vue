@@ -5,21 +5,21 @@
       label="Height:"
       name="height"
       :hasError="!!errors.height"
-      rules="required"
+      rules="required|numeric"
     />
     <InputField
       id="width"
       label="Width:"
       name="width"
       :hasError="!!errors.width"
-      rules="required"
+      rules="required|numeric"
     />
     <InputField
       id="length"
       label="Length:"
       name="length"
       :hasError="!!errors.length"
-      rules="required"
+      rules="required|numeric"
     />
   </div>
 </template>

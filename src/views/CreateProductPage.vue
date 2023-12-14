@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProductCreateHeader />
+    <ProductCreateHeader :clickSaveButton="clickSaveButton" />
     <div class="add_product">
       <Form @submit="onSubmit" v-slot="{ errors }" id="product_form">
         <InputField
@@ -8,7 +8,7 @@
           label="SKU:"
           name="sku"
           :hasError="!!errors.sku"
-          rules="required"
+          rules="required|no_spaces"
         />
         <InputField
           id="name"
@@ -22,7 +22,7 @@
           label="Price in $:"
           name="price"
           :hasError="!!errors.price"
-          rules="required"
+          rules="required|numeric"
         />
 
         <ProductTypeSelector
@@ -30,9 +30,13 @@
           :hasError="!!errors.product_type"
         />
 
-        <component :is="selectedTypeComponent" :errors="errors" />
+        <component
+          v-if="selectedType"
+          :is="selectedTypeComponent"
+          :errors="errors"
+        />
 
-        <button type="submit">Submit</button>
+        <button hidden id="save_form"></button>
       </Form>
     </div>
   </div>
@@ -56,6 +60,10 @@ const productStore = useProductStore();
 
 const changeType = (type) => {
   selectedType.value = type;
+};
+
+const clickSaveButton = () => {
+  document.getElementById("save_form").click();
 };
 
 const onSubmit = (value) => {

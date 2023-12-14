@@ -4,8 +4,8 @@
       id="size"
       label="Size (in MB):"
       name="size"
-      :hasError="!!errors.size"
-      rules="required"
+      :hasError="!!errors?.size"
+      rules="required|numeric"
     />
   </div>
 </template>

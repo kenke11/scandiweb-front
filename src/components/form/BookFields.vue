@@ -5,7 +5,7 @@
       label="Weight (in Kg):"
       name="weight"
       :hasError="!!errors.weight"
-      rules="required"
+      rules="required|numeric"
     />
   </div>
 </template>

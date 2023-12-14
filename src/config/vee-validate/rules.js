@@ -6,15 +6,24 @@
 // ===============================================================================================
 // ===============================================================================================
 import { defineRule } from "vee-validate"; // npm install vee-validate --save
-import { required, min } from "@vee-validate/rules"; // npm install @vee-validate/rules
+import { required, min, numeric } from "@vee-validate/rules"; // npm install @vee-validate/rules
 
 defineRule("required", required);
 defineRule("min", min);
+defineRule("numeric", numeric);
 defineRule("confirmed", (value, [target], ctx) => {
   if (value === ctx.form[target]) {
     return true;
   }
   return "Passwords must match";
+});
+
+defineRule("no_spaces", (value) => {
+  const regex = /^[a-zA-Z0-9_-]*$/; // Regular expression allowing only letters (no spaces)
+  if (!value || !regex.test(value)) {
+    return "Spaces not allowed";
+  }
+  return true;
 });
 
 // ===============================================================================================
