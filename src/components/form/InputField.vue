@@ -7,14 +7,16 @@
         :name="name"
         :type="type"
         :class="{
-          invalid: hasError,
+          invalid: hasError || !!skuErrorMessage,
         }"
         v-model="defaultValue"
         :rules="rules"
         :value="value"
+        @change="onInput"
       />
       <p class="h-3 py-1">
-        <ErrorMessage :name="name" class="px-3 text-sm text-red-500" />
+        <small><ErrorMessage :name="name" /></small>
+        <small v-if="!!skuErrorMessage">{{ skuErrorMessage }}</small>
       </p>
     </div>
   </div>
@@ -23,6 +25,7 @@
 <script setup>
 import { Field, ErrorMessage } from "vee-validate";
 import { ref, watch, defineProps } from "vue";
+import { useProductStore } from "@/store/Product";
 
 const props = defineProps({
   id: {
@@ -56,12 +59,36 @@ const props = defineProps({
     required: false,
     default: "",
   },
+  skuError: {
+    type: String,
+    required: false,
+    default: null,
+  },
 });
+
 const defaultValue = ref(props.value);
+const skuErrorMessage = ref(null);
+const product = useProductStore();
+
+const onInput = () => {
+  if (props.name === "sku") {
+    product.removeSkuErrorMessage();
+  }
+};
+
 watch(
   () => props.value,
   (newValue) => {
     defaultValue.value = newValue;
+  }
+);
+
+watch(
+  () => props.skuError,
+  (newValue) => {
+    if (props.name === "sku") {
+      skuErrorMessage.value = newValue;
+    }
   }
 );
 </script>

@@ -16,7 +16,9 @@
         <option value="furniture">Furniture</option>
       </Field>
       <p class="h-3 py-1">
-        <ErrorMessage name="product_type" class="px-3 text-sm text-red-500" />
+        <small>
+          <ErrorMessage name="product_type" class="px-3 text-sm text-red-500" />
+        </small>
       </p>
     </div>
   </div>

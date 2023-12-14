@@ -7,6 +7,7 @@ export const useProductStore = defineStore("productStore", {
   state: () => ({
     products: [],
     notification: null,
+    skuErrorMassage: null,
     apiUrl: process.env.VUE_APP_API_URL,
   }),
   actions: {
@@ -57,6 +58,9 @@ export const useProductStore = defineStore("productStore", {
           await router.push({ name: "productList" });
         }
       } catch (e) {
+        if (e?.response.status === 422 && !!e?.response.data.errors.sku) {
+          this.skuErrorMassage = e?.response.data.errors.sku;
+        }
         this.setNotification("", e.status);
       }
     },
@@ -77,6 +81,9 @@ export const useProductStore = defineStore("productStore", {
       } catch (e) {
         this.setNotification("", e.status);
       }
+    },
+    removeSkuErrorMessage() {
+      this.skuErrorMassage = null;
     },
     setNotification(message, status) {
       this.notification = {};

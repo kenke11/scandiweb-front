@@ -8,8 +8,10 @@
           label="SKU:"
           name="sku"
           :hasError="!!errors.sku"
+          :skuError="skuError"
           rules="required|no_spaces"
         />
+
         <InputField
           id="name"
           label="Name:"
@@ -55,6 +57,7 @@ import { useProductStore } from "@/store/Product";
 
 const selectedType = ref("");
 const selectedTypeComponent = ref("");
+const skuError = ref(null);
 
 const productStore = useProductStore();
 
@@ -86,6 +89,13 @@ watch(
       default:
         selectedTypeComponent.value = "";
     }
+  }
+);
+
+watch(
+  () => productStore.skuErrorMassage,
+  (newValue) => {
+    skuError.value = newValue;
   }
 );
 </script>
